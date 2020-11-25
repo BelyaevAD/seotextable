@@ -5,10 +5,15 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "belyaevad",
+            "name": "Belyaev Alexander",
             "email": "belyaevad@gmail.com"
         }
     ],
+    "homepage": "https://github.com/BelyaevAD/seotextable",
+    "support": {
+        "issues": "https://github.com/BelyaevAD/seotextable/issues",
+        "source": "https://github.com/BelyaevAD/seotextable"
+    },
     "minimum-stability": "dev",
     "require": {
         "php": "^7.2.5",
