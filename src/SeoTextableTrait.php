@@ -38,7 +38,7 @@ trait SeoTextableTrait
                     $search[] = strip_tags($link);
                     $replace[] = $link;
                 }
-                return str_ireplace($search, $replace, $val);
+                return str_replace($search, $replace, $val);
             }
         }
 
