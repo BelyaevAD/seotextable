@@ -24,12 +24,15 @@ class SeoTextableServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../resources/config/seotextable.php' => config_path('seotextable.php'),
+            __DIR__
+            .'/../resources/config/seotextable.php' => config_path('seotextable.php'),
         ], 'config');
 
-        if (!class_exists('CreateSeoTextableTable')) {
+        if ( ! class_exists('CreateSeoTextableTable')) {
             $this->publishes([
-                __DIR__.'/../resources/database/migrations/create_seo_textable_table.php.stub' => database_path('migrations/' . date('Y_m_d_His') . '_create_seo_textable_table.php'),
+                __DIR__
+                .'/../resources/database/migrations/create_seo_textable_table.php.stub' => database_path('migrations/'
+                    .date('Y_m_d_His').'_create_seo_textable_table.php'),
             ], 'migrations');
         }
 

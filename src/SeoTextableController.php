@@ -11,7 +11,7 @@ class SeoTextableController extends Controller
 {
     public function readList($limit = 10)
     {
-        if (!$this->CheckAuth()) {
+        if ( ! $this->CheckAuth()) {
             return response('Unauthorized', 401);
         }
 
@@ -34,12 +34,13 @@ class SeoTextableController extends Controller
     private function CheckAuth()
     {
         $key = \request()->get('token', false);
+
         return $key == config('seotextable.token');
     }
 
     public function HasRead(Request $request)
     {
-        if (!$this->CheckAuth()) {
+        if ( ! $this->CheckAuth()) {
             return response('Unauthorized', 401);
         }
 
@@ -60,7 +61,7 @@ class SeoTextableController extends Controller
 
     public function SetLinks(Request $request)
     {
-        if (!$this->CheckAuth()) {
+        if ( ! $this->CheckAuth()) {
             return response('Unauthorized', 401);
         }
 
@@ -70,15 +71,16 @@ class SeoTextableController extends Controller
 
             if ($data && is_array($data) && sizeof($data)) {
                 $ok_list = [];
-                foreach ($data as $key=>$item) {
+                foreach ($data as $key => $item) {
                     if (isset($item['id']) && isset($item['links'])) {
                         $up = SeoTextable::whereId($item['id'])->update([
                             'has_links' => true,
                             'links'     => $item['links'],
                         ]);
 
-                        if ($up)
+                        if ($up) {
                             $ok_list[$key] = $item['id'];
+                        }
                     }
 
                 }
@@ -88,6 +90,17 @@ class SeoTextableController extends Controller
         }
 
         return response('error', 400);
+    }
+
+    public function StartUpdate()
+    {
+        if ( ! $this->CheckAuth()) {
+            return response('Unauthorized', 401);
+        }
+
+        SeoTextable::whereHasRead(1)->update([
+            'has_read' => false,
+        ]);
 
     }
 }

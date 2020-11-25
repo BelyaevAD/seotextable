@@ -22,22 +22,22 @@ trait SeoTextableTrait
             $seoText = SeoTextable::create(
                 [
                     'textable_id'   => $this->getKey(),
-                    'textable_type' => static::class ?? self::class ?? get_class(),
+                    'textable_type' => static::class ??
+                        self::class ?? get_class(),
                 ]
             );
             $seoText->save();
-        }
-        elseif($links->first()->has_links) {
+        } elseif ($links->first()->has_links) {
             $links = $links->first()->links;
-            if(is_array($links) && sizeof($links)) {
-
-                usort($links, function($a, $b) {
+            if (is_array($links) && sizeof($links)) {
+                usort($links, function ($a, $b) {
                     return mb_strlen($b) - mb_strlen($a);
                 });
                 foreach ($links as $link) {
                     $search[] = strip_tags($link);
                     $replace[] = $link;
                 }
+
                 return str_replace($search, $replace, $val);
             }
         }
