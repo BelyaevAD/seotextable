@@ -1,0 +1,34 @@
+{
+    "name": "belyaevad/seotextable",
+    "description": "Related SEO links for texts",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "belyaevad",
+            "email": "belyaevad@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.2.5",
+        "illuminate/config": "^7.0",
+        "illuminate/database": "^7.0",
+        "illuminate/support": "^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Belyaevad\\SeoTextable\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Belyaevad\\SeoTextable\\SeoTextableServiceProvider"
+            ]
+        }
+    }
+}
