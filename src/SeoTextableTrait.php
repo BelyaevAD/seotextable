@@ -22,7 +22,7 @@ trait SeoTextableTrait
             $seoText = SeoTextable::create(
                 [
                     'textable_id'   => $this->getKey(),
-                    'textable_type' => get_class(),
+                    'textable_type' => static::class ?? self::class ?? get_class(),
                 ]
             );
             $seoText->save();
