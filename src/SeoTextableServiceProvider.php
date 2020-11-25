@@ -2,9 +2,11 @@
 
 namespace Belyaevad\SeoTextable;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Application as LaravelApplication;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Laravel\Lumen\Application as LumenApplication;
 
-class SeoTextableServiceProvider extends ServiceProvider
+class SeoTextableServiceProvider extends BaseServiceProvider
 {
     /**
      * Register services.
@@ -23,10 +25,14 @@ class SeoTextableServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__
-            .'/../resources/config/seotextable.php' => config_path('seotextable.php'),
-        ], 'config');
+        $source = dirname(__DIR__).'/resources/config/seotextable.php';
+
+        if ($this->app instanceof LaravelApplication) {
+            $this->publishes([$source => config_path('seotextable.php')],
+                'config');
+        }
+
+        $this->mergeConfigFrom($source, 'seotextable');
 
         if ( ! class_exists('CreateSeoTextableTable')) {
             $this->publishes([
