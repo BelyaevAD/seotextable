@@ -98,9 +98,10 @@ class SeoTextableController extends Controller
             return response('Unauthorized', 401);
         }
 
-        SeoTextable::whereHasRead(1)->update([
+        $up = SeoTextable::whereHasRead(1)->update([
             'has_read' => false,
         ]);
 
+        return response('Ok update: '.$up);
     }
 }
