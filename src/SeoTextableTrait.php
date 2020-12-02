@@ -27,8 +27,7 @@ trait SeoTextableTrait
                 ]
             );
             $seoText->save();
-        } elseif ($links->first()->has_links) {
-            $links = $links->first()->links;
+        } elseif ($links->count() && $links = $links->first()->has_links) {
             if (is_array($links) && sizeof($links)) {
                 usort($links, function ($a, $b) {
                     return mb_strlen($b) - mb_strlen($a);
