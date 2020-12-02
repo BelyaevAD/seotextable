@@ -18,7 +18,7 @@ trait SeoTextableTrait
     public function seoText($val)
     {
         $links = $this->linksText()->get();
-        if ( ! $links->count()) {
+        if ( ! $links->count() && $this->getKey() ) {
             $seoText = SeoTextable::create(
                 [
                     'textable_id'   => $this->getKey(),
