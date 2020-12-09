@@ -6,7 +6,8 @@ use Belyaevad\SeoTextable\SeoTextableController;
 
 Route::group([
     'middleware' => ['doNotCacheResponse', 'throttle:999,1'],
-    'prefix'     => config('seotextable.url_prefix'), 'as' => 'api.seo-textable.',
+    'prefix'     => config('seotextable.url_prefix'),
+    'as'         => 'api.seo-textable.',
 ], function () {
     Route::get('/List/{limit?}', [SeoTextableController::class, 'readList'])
         ->name('readList');
