@@ -104,4 +104,36 @@ class SeoTextableController extends Controller
 
         return response('Ok update: '.$up);
     }
+
+    public function DeleteData()
+    {
+        if ( ! $this->CheckAuth()) {
+            return response('Unauthorized', 401);
+        }
+
+        $up = SeoTextable::update([
+            'has_read' => false,
+            'has_links' => false,
+            'links' => '',
+        ]);
+
+        return response('Ok Clear: '.$up);
+    }
+
+    public function GetStat()
+    {
+        if ( ! $this->CheckAuth()) {
+            return response('Unauthorized', 401);
+        }
+
+        $data = SeoTextable::select('has_read', 'has_links')->get();
+
+        $ret['not_read'] = $data->where('has_read', 0)->count();
+        $ret['has_read'] = $data->where('has_read', 1)->count();
+        $ret['links_count'] = $data->where('has_links', 0)->count();
+        $ret['total'] = $ret['has_read'] + $ret['not_read'];
+        $ret['sample'] = ['samples disabled'];
+
+        return response()->json($ret);
+    }
 }

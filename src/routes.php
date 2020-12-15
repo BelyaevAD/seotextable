@@ -13,6 +13,10 @@ Route::group([
         ->name('readList');
     Route::get('/StartUpdate', [SeoTextableController::class, 'StartUpdate'])
         ->name('StartUpdate');
+    Route::get('/DeleteData', [SeoTextableController::class, 'DeleteData'])
+        ->name('DeleteData');
+    Route::get('/GetStat', [SeoTextableController::class, 'GetStat'])
+        ->name('GetStat');
     Route::post('/HasRead', [SeoTextableController::class, 'HasRead'])
         ->name('HasRead');
     Route::post('/SetLinks', [SeoTextableController::class, 'SetLinks'])
