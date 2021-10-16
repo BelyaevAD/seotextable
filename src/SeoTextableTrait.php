@@ -15,10 +15,13 @@ trait SeoTextableTrait
             '/<img .*?>/i',
         ];
 
+    public $links = null;
+
     public function seoText($val)
     {
-        $links = $this->linksText()->get();
-        if ( ! $links->count() && $this->getKey() ) {
+        $this->links ??= $this->linksText()->get();
+
+        if ( ! $this->links->count() && $this->getKey() ) {
             $seoText = SeoTextable::create(
                 [
                     'textable_id'   => $this->getKey(),
@@ -27,8 +30,8 @@ trait SeoTextableTrait
                 ]
             );
             $seoText->save();
-        } elseif ($links->count() && $links->first() && isset($links->first()->has_links)) {
-            $links = $links->first()->links;
+        } elseif ($this->links->count() && $this->links->first() && isset($this->links->first()->has_links)) {
+            $links = $this->links->first()->links;
             if (is_array($links) && sizeof($links)) {
                 usort($links, function ($a, $b) {
                     return mb_strlen($b) - mb_strlen($a);
